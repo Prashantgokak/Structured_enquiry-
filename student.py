@@ -1,17 +1,10 @@
-import os
-  
-def show_grade_criteria():
-    print("--- Grade Criteria ---")
-    print("90 - 100 : Grade S")
-    print("80 - 89  : Grade A")
-    print("65 - 79  : Grade B")
-    print("50 - 64  : Grade C")
-    print("40 - 49  : Grade D")
-    print("Below 40 : Grade F")
-    print("----------------------\n")
+# Program to calculate student grade
+
+def calculate_average(m1, m2, m3):
+    return (m1 + m2 + m3) / 3
 
 
-def calculate_grade(avg):
+def assign_grade(avg):
     if avg >= 90:
         return "S"
     elif avg >= 80:
@@ -26,32 +19,40 @@ def calculate_grade(avg):
         return "F"
 
 
-def main():
-    # Read Jenkins parameters
-    name = os.getenv("name", "prashant")
-    dept = os.getenv("dept", "BCA")
-    sem = os.getenv("sem", "3")
-
-    m1 = int(os.getenv("m1", 97))
-    m2 = int(os.getenv("m2", 84))
-    m3 = int(os.getenv("m3", 79))
-
-    show_grade_criteria()
-
-    print("--- Student Details ---")
-    print(f"Name: {name}")
-    print(f"Department: {dept}")
-    print(f"Semester: {sem}\n")
-
-    print("--- Subject Marks ---")
-    print(f"Subject 1: {m1}")
-    print(f"Subject 2: {m2}")
-    print(f"Subject 3: {m3}\n")
-
-    avg = (m1 + m2 + m3) / 3
-    print(f"Average Marks: {avg}")
-    print(f"Final Grade: {calculate_grade(avg)}")
-
-
 if __name__ == "__main__":
-    main()
+    import sys
+    print("=== Student Grade Calculator ===")
+
+    try:
+        # If user gives input through command line
+        if len(sys.argv) == 7:
+            name = sys.argv[1]
+            department = sys.argv[2]
+            semester = int(sys.argv[3])
+            m1 = float(sys.argv[4])
+            m2 = float(sys.argv[5])
+            m3 = float(sys.argv[6])
+
+        else:
+            # Take user input
+            name = input("Enter Student Name: ")
+            department = input("Enter Department: ")
+            semester = int(input("Enter Semester: "))
+            m1 = float(input("Enter marks in Subject 1: "))
+            m2 = float(input("Enter marks in Subject 2: "))
+            m3 = float(input("Enter marks in Subject 3: "))
+
+        print("\n=== Program Parameters ===")
+        print(f"Student Name : {name}")
+        print(f"Department   : {department}")
+        print(f"Semester     : {semester}")
+        print(f"Marks        : {m1}, {m2}, {m3}")
+
+        average = calculate_average(m1, m2, m3)
+        grade = assign_grade(average)
+
+        print(f"\nAverage = {average:.2f}")
+        print(f"Grade   = {grade}")
+
+    except ValueError:
+        print("Invalid input. Please enter valid numeric values.")
