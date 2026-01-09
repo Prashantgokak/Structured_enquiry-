@@ -1,62 +1,78 @@
-# test_student.py
+# Import the grade calculation function from main program
+from student import calculate_grade
 
-from student import calculate_average, assign_grade
+# ---------------- GRADE S TEST CASES ----------------
 
-# -------- GRADE S --------
-def test_grade_S_lower():
-    assert assign_grade(calculate_average(90, 90, 90)) == "S"
+# Test lower boundary for Grade S (exactly 90)
+def test_grade_S_lower_boundary():
+    assert calculate_grade(90) == "S"
 
-def test_grade_S_middle():
-    assert assign_grade(calculate_average(95, 95, 95)) == "S"
+# Test middle value for Grade S
+def test_grade_S_middle_value():
+    assert calculate_grade(95) == "S"
 
-def test_grade_S_upper():
-    assert assign_grade(calculate_average(100, 100, 100)) == "S"
+# Test upper boundary for Grade S (exactly 100)
+def test_grade_S_upper_boundary():
+    assert calculate_grade(100) == "S"
 
+# ---------------- GRADE A TEST CASES ----------------
 
-# -------- GRADE A --------
-def test_grade_A_lower():
-    assert assign_grade(calculate_average(80, 80, 80)) == "A"
+# Test lower boundary for Grade A (exactly 80)
+def test_grade_A_lower_boundary():
+    assert calculate_grade(80) == "A"
 
-def test_grade_A_middle():
-    assert assign_grade(calculate_average(85, 85, 85)) == "A"
+# Test middle value for Grade A
+def test_grade_A_middle_value():
+    assert calculate_grade(85) == "A"
 
-def test_grade_A_upper():
-    assert assign_grade(calculate_average(89.99, 89.99, 89.99)) == "A"
+# Test upper boundary just below 90
+def test_grade_A_upper_boundary():
+    assert calculate_grade(89.99) == "A"
 
+# ---------------- GRADE B TEST CASES ----------------
 
-# -------- GRADE B --------
-def test_grade_B_lower():
-    assert assign_grade(calculate_average(65, 65, 65)) == "B"
+# Test lower boundary for Grade B (exactly 65)
+def test_grade_B_lower_boundary():
+    assert calculate_grade(65) == "B"
 
-def test_grade_B_middle():
-    assert assign_grade(calculate_average(72, 72, 72)) == "B"
+# Test middle value for Grade B
+def test_grade_B_middle_value():
+    assert calculate_grade(72) == "B"
 
-def test_grade_B_upper():
-    assert assign_grade(calculate_average(79.99, 79.99, 79.99)) == "B"
+# Test upper boundary just below 80
+def test_grade_B_upper_boundary():
+    assert calculate_grade(79.99) == "B"
 
+# ---------------- GRADE C TEST CASES ----------------
 
-# -------- GRADE C --------
-def test_grade_C_lower():
-    assert assign_grade(calculate_average(50, 50, 50)) == "C"
+# Test lower boundary for Grade C (exactly 50)
+def test_grade_C_lower_boundary():
+    assert calculate_grade(50) == "C"
 
-def test_grade_C_middle():
-    assert assign_grade(calculate_average(58, 58, 58)) == "C"
+# Test middle value for Grade C
+def test_grade_C_middle_value():
+    assert calculate_grade(58) == "C"
 
-def test_grade_C_upper():
-    assert assign_grade(calculate_average(64.99, 64.99, 64.99)) == "C"
+# Test upper boundary just below 65
+def test_grade_C_upper_boundary():
+    assert calculate_grade(64.99) == "C"
 
+# ---------------- GRADE D TEST CASES ----------------
 
-# -------- GRADE D --------
-def test_grade_D_lower():
-    assert assign_grade(calculate_average(40, 40, 40)) == "D"
+# Test lower boundary for Grade D (exactly 40)
+def test_grade_D_lower_boundary():
+    assert calculate_grade(40) == "D"
 
-def test_grade_D_middle():
-    assert assign_grade(calculate_average(45, 45, 45)) == "D"
+# Test middle value for Grade D
+def test_grade_D_middle_value():
+    assert calculate_grade(45) == "D"
 
-def test_grade_D_upper():
-    assert assign_grade(calculate_average(49.99, 49.99, 49.99)) == "D"
+# Test upper boundary just below 50
+def test_grade_D_upper_boundary():
+    assert calculate_grade(49.99) == "D"
 
+# ---------------- GRADE F TEST CASES ----------------
 
-# -------- GRADE F --------
-def test_grade_F():
-    assert assign_grade(calculate_average(30, 30, 30)) == "F"
+# Test value below 40 should return Grade F
+def test_grade_F_below_40():
+    assert calculate_grade(30) == "F"
