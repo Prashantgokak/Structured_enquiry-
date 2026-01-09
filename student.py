@@ -1,4 +1,5 @@
-# Program to calculate student grade
+# student.py
+# Student Grade Calculator (CI / Jenkins Safe)
 
 def calculate_average(m1, m2, m3):
     return (m1 + m2 + m3) / 3
@@ -19,28 +20,19 @@ def assign_grade(avg):
         return "F"
 
 
-if __name__ == "__main__":
+def main():
     import sys
+
     print("=== Student Grade Calculator ===")
 
-    try:
-        # If user gives input through command line
-        if len(sys.argv) == 7:
-            name = sys.argv[1]
-            department = sys.argv[2]
-            semester = int(sys.argv[3])
-            m1 = float(sys.argv[4])
-            m2 = float(sys.argv[5])
-            m3 = float(sys.argv[6])
-
-        else:
-            # Take user input
-            name = input("Enter Student Name: ")
-            department = input("Enter Department: ")
-            semester = int(input("Enter Semester: "))
-            m1 = float(input("Enter marks in Subject 1: "))
-            m2 = float(input("Enter marks in Subject 2: "))
-            m3 = float(input("Enter marks in Subject 3: "))
+    # Command-line execution (Jenkins safe)
+    if len(sys.argv) == 7:
+        name = sys.argv[1]
+        department = sys.argv[2]
+        semester = int(sys.argv[3])
+        m1 = float(sys.argv[4])
+        m2 = float(sys.argv[5])
+        m3 = float(sys.argv[6])
 
         print("\n=== Program Parameters ===")
         print(f"Student Name : {name}")
@@ -48,11 +40,17 @@ if __name__ == "__main__":
         print(f"Semester     : {semester}")
         print(f"Marks        : {m1}, {m2}, {m3}")
 
-        average = calculate_average(m1, m2, m3)
-        grade = assign_grade(average)
+        avg = calculate_average(m1, m2, m3)
+        grade = assign_grade(avg)
 
-        print(f"\nAverage = {average:.2f}")
+        print(f"\nAverage = {avg:.2f}")
         print(f"Grade   = {grade}")
 
-    except ValueError:
-        print("Invalid input. Please enter valid numeric values.")
+    else:
+        print("Interactive mode disabled in CI environment.")
+        print("Usage:")
+        print("python student.py <name> <dept> <semester> <m1> <m2> <m3>")
+
+
+if __name__ == "__main__":
+    main()
